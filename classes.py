@@ -19,6 +19,8 @@ class Professor():
 		self._nome = nome
 		self._matricula = matricula
 
+#Métodos	
+#Cadastrar uma Nova Disciplina
 	def adcionar_disciplina(self, nome):
 		if len(listadisciplina) > 0:
 			for disciplina in listadisciplina:
@@ -31,13 +33,16 @@ class Professor():
 				listadisciplina[nome] = Disciplina(nome, self)
 				print("Disciplina Registrada com Sucesso!")
 
+#Cadastrar uma Nova Atividade em uma Disciplina
 	def adcionar_atividade(self, disciplina, nome, data):
 		if disciplina in listadisciplina:
 				if len(listaatividadesabertas) > 0:
 					atividades_abertas = list(listaatividadesabertas.values())
 					for atv in atividades_abertas:
-						if data == atv.data and disciplina == atv.disciplina:
-							return print("Já há uma atividade desta disciplina marcada para esta data!")
+						if nome == atv.nome and disciplina == atv.disciplina:
+							return print("ERRO: Já existe uma atividade desta Disciplina com esse nome")
+						elif data == atv.data and disciplina == atv.disciplina:
+							return print("ERRO: Já há uma atividade desta disciplina marcada para esta data!")
 						else:
 							listaatividadesabertas[nome] = Atividade(disciplina, nome, data)
 							print("Atividade Registrada com Sucesso!")
@@ -46,6 +51,8 @@ class Professor():
 					print("Atividade Registrada com Sucesso!")
 		else:
 			print("ERRO: Essa Disciplina Não Existe")
+
+	#Função para Marcar a Atividade como Concluida
 	def concluir_atividade(self, disciplina, atividade):
 		if atividade in listaatividadesabertas and listaatividadesabertas[atividade].disciplina == disciplina:
 			listaatividadesconcluidas[listaatividadesabertas[atividade].nome] = listaatividadesabertas[atividade]
@@ -53,7 +60,9 @@ class Professor():
 			print("Atividade Marcada como Concluida")
 		else:
 			print("ERRO: Atividade Não Existe")
+#Listagagem das Diferentes Disciplinas
 
+#Atividades Pendentes
 	def listar_abertas(self):
 		atividades_abertas = list(listaatividadesabertas.values())
 		print("-"*20, "Atividades Pendentes", "-"*20)
@@ -63,6 +72,8 @@ class Professor():
 			print(f"Nome: {atv.nome}")
 			print(f"Data: {atv.data}")
 		print("-"*60)
+
+#Atividades Concluidas
 	def listar_concluidas(self):
 		atividades_concluidas = list(listaatividadesconcluidas.values())
 		print("-"*18, "Atividades Concluidas", "-"*19)
